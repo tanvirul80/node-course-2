@@ -37,8 +37,8 @@ app.post('/todos', (req, res) => {
 
 app.get('/todos', (req,res) => {
 
-  Todo.find().then( (documents) => {
-    res.send({documents}) //we are sending the documents back wrapped in an object as this will allow us to send further information with our documents later on in the future should we want to
+  Todo.find().then( (todos) => {
+    res.send({todos}) //we are sending the documents back wrapped in an object as this will allow us to send further information with our documents later on in the future should we want to
   }, (error) => {
     res.status(400).send(`There was an error: ${error}`)
   });
