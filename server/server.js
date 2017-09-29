@@ -22,12 +22,11 @@ app.post('/todos', (req, res) => {
   });
 
   // Saving our new Todo to the database using the save() method. The save() method returns a Promise which when resolved return the saved document.
-  todo.save().then( (document) => {
-    console.log(`The following document was saved to the database: ${document}`);
-    res.send('Saved to database');
+  todo.save().then((document) => {
+    res.send(document);
   }, (error) => {
     console.log(`There was an error saving the document to the database: ${error}`);
-//set a HTTP status to respond with. We will use 400 to report a bad request and then send the error message
+    //set a HTTP status to respond with. We will use 400 to report a bad request and then send the error message
     res.status(400).send(`There was an error: ${error}`);
 
 
@@ -39,3 +38,5 @@ app.post('/todos', (req, res) => {
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
+
+module.exports = {app}; // same as writing module.exports.app = app;
