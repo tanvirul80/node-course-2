@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const {mongoose} = require('./db/mongoose');
 const {Todo} = require('./models/todo');
 const {User} = require('./models/user');
+const {ObjectID} = require('mongodb');
 
 const app = express();
 
@@ -41,6 +42,36 @@ app.get('/todos', (req,res) => {
     res.send({todos}) //we are sending the documents back wrapped in an object as this will allow us to send further information with our documents later on in the future should we want to
   }, (error) => {
     res.status(400).send(`There was an error: ${error}`)
+  });
+
+});
+
+app.get('/todos/:id', (req, res) => {
+
+  var id = req.params.id;
+
+  // Validate id using ObjectID.isValid() and if invalid respond with 404 status code
+
+  if(!ObjectID.isValid(id)){
+    return res.status(404).send('Invalid Id');
+  }
+
+  // findById looking for a matching document
+  Todo.findById(id).then((todo) => {
+
+    if(!todo){
+
+      // If there is no todo, send back 404 with empty body
+      return res.status(404).send('No todo found with that id');
+    }
+
+    // If there is a todo send it back
+    res.send(todo);
+
+  }).catch( (error) => {
+
+    // If there is an error respond with a 404 and return an empty body back
+    res.status(404).send();
   });
 
 });
