@@ -66,7 +66,7 @@ app.get('/todos/:id', (req, res) => {
     }
 
     // If there is a todo send it back
-    res.send(todo);
+    res.send({todo});
 
   }).catch( (error) => {
 
