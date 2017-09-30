@@ -78,6 +78,38 @@ app.get('/todos/:id', (req, res) => {
 });
 
 
+app.delete('/todos/:id', (req,res) => {
+
+  var id = req.params.id;
+
+  // Validate id using ObjectID.isValid() and if invalid respond with 404 status code
+
+  if(!ObjectID.isValid(id)){
+    return res.status(404).send('Invalid Id');
+  }
+
+  // findByIdAndRemove looking for a matching document to delete
+  Todo.findByIdAndRemove(id).then((todo) => {
+
+    if(!todo){
+
+      // If there is no todo, send back 404 with empty body
+      return res.status(404).send('No todo found with that id');
+    }
+
+    // If there is a todo which was deleted send it back
+    res.send({todo});
+
+  }).catch( (error) => {
+
+    // If there is an error respond with a 404 and return an empty body back
+    res.status(404).send();
+  });
+
+
+});
+
+
 
 
 app.listen(port, () => {
