@@ -11,7 +11,8 @@ let db = {
 };
 
 // connect mongoose to the database
-mongoose.connect(db.mlab || db.localhost);
+// if process.env.PORT exists then use db.mlab otherwise use db.localhost
+mongoose.connect( process.env.PORT ? db.mlab : db.localhost);
 
 // export the mongoose object to use in other files. the code is a shortcut way of writing: module.export.mongoose = mongoose
 module.export = {mongoose};
