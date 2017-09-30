@@ -69,7 +69,7 @@ describe('POST /todos', () => {
 
         Todo.find().then((todos) => {
           expect(todos.length).toBe(2);
-          done()
+          done();
         }).catch((e) => done(e));
 
       });
@@ -111,7 +111,7 @@ describe('GET /todos/:id', () => { // Describe block to group our tests for the 
       .get(`/todos/${todos[0]._id.toHexString()}`) //pass in the todos using template literal. We must also use the .toHexString function to convert the id object into a string
       .expect(200) // we would expect a 200 status code
       .expect( (res) => { // using a custom assertion. Supertest passess the response to our function
-        expect(res.body.todo.text).toBe(todos[0].text) // this expect call is from the expect library
+        expect(res.body.todo.text).toBe(todos[0].text); // this expect call is from the expect library
       })
       .end(done);
 
