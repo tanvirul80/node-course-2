@@ -212,9 +212,9 @@ describe('POST /todos', () => {
       .send(updatedDoc)
       .expect(200)
       .expect( (res) => {
-        expect(res.body.text).toBe(updatedDoc.text);
-        expect(res.body.completed).toBe(true);
-        expect(res.body.completedAt).toBeA('number');
+        expect(res.body.todo.text).toBe(updatedDoc.text);
+        expect(res.body.todo.completed).toBe(true);
+        expect(res.body.todo.completedAt).toBeA('number');
         done();
       }).catch( (error) => done(error));
 
@@ -234,9 +234,9 @@ describe('POST /todos', () => {
       .send(updatedDoc)
       .expect(200)
       .expect( (res) => {
-        expect(res.body.text).toBe(updatedDoc.text);
-        expect(res.body.completed).toBe(false);
-        expect(res.body.completedAt).toNotExist();
+        expect(res.body.todo.text).toBe(updatedDoc.text);
+        expect(res.body.todo.completed).toBe(false);
+        expect(res.body.todo.completedAt).toNotExist();
         done();
       }).catch( (error) => done(error));
 
