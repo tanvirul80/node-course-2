@@ -2,6 +2,8 @@
 // when we want to start up our node app, we will run this file
 // this file will get everything ready to go
 
+require('./config/config')
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
@@ -13,7 +15,7 @@ const {User} = require('./models/user');
 const {ObjectID} = require('mongodb');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 

@@ -4,15 +4,9 @@ const mongoose = require('mongoose');
 // set mongoose to use ES6 Promises
 mongoose.Promise = global.Promise;
 
-// create a db object to store the locations of the localhost database and the mlab database
-let db = {
-  localhost: 'mongodb://localhost:27017/Todoapp',
-  mlab: 'mongodb://tanvirul:d9625WGW@ds159024.mlab.com:59024/learning-node'
-};
-
 // connect mongoose to the database
 // if process.env.PORT exists then use db.mlab otherwise use db.localhost
-mongoose.connect( process.env.PORT ? db.mlab : db.localhost);
+mongoose.connect(db);
 
 // export the mongoose object to use in other files. the code is a shortcut way of writing: module.export.mongoose = mongoose
 module.export = {mongoose};
